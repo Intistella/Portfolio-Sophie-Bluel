@@ -134,9 +134,6 @@ li:hover {
 .filter{
 	margin-top: 51px;
 	margin-bottom: 51px;
-}
-
-.filter ul{
 	width: 100%;
 	display: flex;
 	flex-direction: row;
@@ -144,8 +141,9 @@ li:hover {
 	gap: 10px;
 }
 
-.filter li{
+.filter__btn{
 	color: #1D6154;
+	background-color: #fff;
 	text-align: center;
 	font-family: Syne;
 	font-size: 16px;
@@ -157,11 +155,8 @@ li:hover {
 	padding: 9px 30px 9px 28px;
 }
 
-.filter a{
-	text-decoration: none;
-}
 
-.filter a :hover{
+.filter__btn:hover{
 	background-color: #1D6154;
 	color: #fff;
 }
