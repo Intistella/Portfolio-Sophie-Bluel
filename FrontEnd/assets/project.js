@@ -18,7 +18,7 @@ function generateProjects (projects){
         const nameElement = document.createElement("p")
         nameElement.innerText = article.title
        
-        // Rattachement des balises au DOM
+        // Rattachement des balises au DOM0
         divGallery.appendChild(projectElement)
         projectElement.appendChild(imageElement)
         projectElement.appendChild(nameElement)

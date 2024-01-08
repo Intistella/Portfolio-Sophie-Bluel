@@ -7,8 +7,10 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-	<meta name="description" content="">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+    <script type="module" src="assets/LogIn.js"></script>
 </head>
 <body>
     <header>
@@ -25,12 +27,15 @@
     <main>
         <section id="login">
             <h2 id="login__title">Log In</h2>
-            <form action="#">
+            <span class="loginError"></span>
+            <form class="login__form" action="#">
                 <label for="email">E-mail</label>
                 <input type="email" name="email" id="email">
+                <p class="emailerror"></p>
                 <label for="password">Mot de passe</label>
                 <input type="password" name="password" id="password">
-                <input type="submit" value="Se connecter">
+                <p class="passworderror"></p>
+                <input type="submit" class="login__btn" value="Se connecter">
             </form>
             <a href="">Mot de passe oublié</a>
         </section>
