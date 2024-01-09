@@ -70,5 +70,3 @@ filterAll.addEventListener("click", function(){
 
 //Import de fonction logedIn 
 import { logedIn } from "./edit.js"
-
-logedIn()
