@@ -68,3 +68,7 @@ filterAll.addEventListener("click", function(){
     generateProjects(projects)    
 })
 
+//Import de fonction logedIn 
+import { logedIn } from "./edit.js"
+
+logedIn()
