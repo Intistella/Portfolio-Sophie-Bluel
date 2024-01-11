@@ -53,13 +53,35 @@ body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
-header {
+.header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0;
 }
+
+.header__edit__div {
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	gap: 5px;
+	color: #fff;
+	background-color: #000;
+	padding: 20px 0;	
+}
+
+.edit__text{
+	font-family: 'Work Sans';
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+}
+
+.nav__logout{
+	display: none;
+}
+
 section {
-	margin: 50px 0
+	margin: 50px 0;
 }
 
 h1{
@@ -82,7 +104,7 @@ h2{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: #1D6154;
 }
 nav ul {
 	display: flex;
@@ -98,6 +120,10 @@ nav li {
 nav a{
 	text-decoration: none;
 	color: #000;
+}
+
+nav ul a:active{
+	font-weight: bolder;
 }
 
 li:hover {
@@ -129,6 +155,30 @@ li:hover {
 #portfolio h2, #login__title {
 	text-align: center;
 	margin-bottom: 1em;
+}
+
+.edit__section{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 15px;
+}
+
+.edit__btn{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 5px;
+	height: 30px;
+}
+
+.edit__btn__text{
+	font-family: 'Work Sans';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+	display: flex;
+	
 }
 
 .filter{

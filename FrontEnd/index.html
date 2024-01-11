@@ -9,19 +9,25 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<script src="https://kit.fontawesome.com/746573b14e.js" crossorigin="anonymous"></script>
 	<script type="module" src="assets/scripts/script.js"></script>
 </head>
 <body>
 <header>
-    <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-    <nav>
-		<ul>
-			<a href="#portfolio"><li>projets</li></a>
-			<a href="#contact"><li>contact</li></a>
-			<a class="nav__login" href="login.html"><li>login</li></a>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-		</ul>
-	</nav>
+	<div class="header__edit"></div>
+	<div class="header">
+    	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+   	 	<nav>
+			<ul>
+				<a href="#portfolio"><li>projets</li></a>
+				<a href="#contact"><li>contact</li></a>
+				<a class="nav__login" href="login.html"><li>login</li></a>
+				<a class="nav__logout" href=""><li>logout</li></a>
+				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			</ul>
+		</nav>
+	</div>
+	
 </header>
 <main>
 	<section id="introduction">
@@ -36,7 +42,10 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div class="edit__section">
+			<h2>Mes Projets</h2>
+			<span class="edit__btn"></span>
+		</div>	
 		<div class="filter">
 			<button class="filter__btn all">Tous</button>
 			<button class="filter__btn objects">Objets</button>

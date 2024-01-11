@@ -1,10 +1,11 @@
+
 //Déclaration des variables
 const loginForm = document.querySelector(".login__form")
-const loginError = document.querySelector(".login__error")
 
 loginForm.addEventListener("submit", async function(event){
     event.preventDefault()
     event.stopImmediatePropagation
+    
 
     const email = event.target.querySelector("[name = email]").value
     const password = event.target.querySelector("[name = password]").value
@@ -19,7 +20,7 @@ loginForm.addEventListener("submit", async function(event){
         
         }).then((response) =>{
             if (!response.ok) {
-                throw new Error("Erreur d\’identifiant ou de mot de passe")
+                throw new Error("Erreur")
             }
             return response.json()
         })
@@ -32,5 +33,12 @@ loginForm.addEventListener("submit", async function(event){
     }
     catch (error) {
         console.log("ça ne fonctionne pas")
+        const loginError = document.querySelector(".login__error")
+        loginError.innerText = "Erreur dans l\’identifiant ou le mot de passe"
+        loginError.style.color = "red"
+        loginError.style.backgroundColor = "#DCEDFF"
+        loginError.style.padding = "10px"
     }
 })
+
+LogedOut()
