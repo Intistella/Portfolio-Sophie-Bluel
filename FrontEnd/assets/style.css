@@ -1,3 +1,4 @@
+@import url(./editpage.css);
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -28,6 +29,7 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
@@ -56,28 +58,7 @@ body {
 .header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0;
-}
-
-.header__edit__div {
-	display: flex;
-	justify-content: center;
-	flex-direction: row;
-	gap: 5px;
-	color: #fff;
-	background-color: #000;
-	padding: 20px 0;	
-}
-
-.edit__text{
-	font-family: 'Work Sans';
-	font-size: 16px;
-	font-style: normal;
-	font-weight: 400;
-}
-
-.nav__logout{
-	display: none;
+	margin: 50px 0;	
 }
 
 section {
@@ -127,7 +108,8 @@ nav ul a:active{
 }
 
 li:hover {
-	color: #B1663C;
+	color: #000;
+	font-weight: bolder;
 }
 #introduction {
 	display: flex;
@@ -155,30 +137,6 @@ li:hover {
 #portfolio h2, #login__title {
 	text-align: center;
 	margin-bottom: 1em;
-}
-
-.edit__section{
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	gap: 15px;
-}
-
-.edit__btn{
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	gap: 5px;
-	height: 30px;
-}
-
-.edit__btn__text{
-	font-family: 'Work Sans';
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-	display: flex;
-	
 }
 
 .filter{
@@ -272,8 +230,6 @@ input[type="submit"]{
 	color: #3D3D3D;
 	margin-bottom: 355px;
 }
-
-
 
 footer nav ul {
 	display: flex;

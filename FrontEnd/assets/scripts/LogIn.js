@@ -1,3 +1,5 @@
+import { LogedOut } from "./edit.js"
+    LogedOut()
 
 //Déclaration des variables
 const loginForm = document.querySelector(".login__form")
@@ -5,7 +7,6 @@ const loginForm = document.querySelector(".login__form")
 loginForm.addEventListener("submit", async function(event){
     event.preventDefault()
     event.stopImmediatePropagation
-    
 
     const email = event.target.querySelector("[name = email]").value
     const password = event.target.querySelector("[name = password]").value
@@ -40,5 +41,3 @@ loginForm.addEventListener("submit", async function(event){
         loginError.style.padding = "10px"
     }
 })
-
-LogedOut()

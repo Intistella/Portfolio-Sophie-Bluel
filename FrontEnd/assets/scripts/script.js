@@ -2,7 +2,7 @@
 const projects = await fetch ('http://localhost:5678/api/works').then(projects => projects.json())
 
 //Générer les projets 
-function generateProjects (projects){
+export function generateProjects (projects){
     for(let i=0; i<projects.length; i++){
         const article = projects[i]
         
@@ -76,4 +76,8 @@ import { logedIn } from "./edit.js"
  import { LogedOut } from "./edit.js"
     LogedOut()
 
+// Import de fonction Modal
+ import { Modal } from "./edit.js"
+    Modal()
 
+    
