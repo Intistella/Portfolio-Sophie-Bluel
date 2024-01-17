@@ -77,7 +77,7 @@ import { logedIn } from "./edit.js"
     LogedOut()
 
 // Import de fonction Modal
- import { Modal } from "./edit.js"
+ import { Modal } from "./modal.js"
     Modal()
 
     

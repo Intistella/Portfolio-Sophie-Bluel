@@ -64,66 +64,6 @@ export function logedIn(){
         })
     }
 
-//Création de la fonction pour la modale
    
-export function Modal(){
-    const editSpan = document.querySelector(".edit__span")   
-    editSpan.addEventListener("click", async function(event){
-        event.preventDefault
-    // Affichage de la modale
-        const modalBox = document.querySelector(".modal__box")
-        document.body.style.backgroundColor = "rgba(0, 0, 0, 0.30)"
-        modalBox.style.display = "block"
 
-    // Création du bouton fermer
-        const xMark = document.createElement("i")
-        xMark.classList = "fa-solid fa-xmark"
-        xMark.setAttribute("id", "modal__exit__icon")
-        modalBox.appendChild(xMark)
-
-    // Event listener pour la bouton fermer    
-        xMark.addEventListener("click", function(event){
-            event.preventDefault
-            modalBox.style.display = "none"
-            document.body.style.backgroundColor = "white"
-        })
-
-    // Création du titre de la modale
-        const modalTitle = document.createElement("p")
-        modalTitle.setAttribute("class", "modal__box__title")
-        modalTitle.innerText = "Galerie photo"
-        modalBox.appendChild(modalTitle)
-
-    //Création de l'élément DOM pour les images de l'API
-        const modalImgContainer = document.createElement("div")
-        modalImgContainer.setAttribute("class", "modal__box__img__container") 
-        modalBox.appendChild(modalImgContainer) 
-        
-    //Import des images de l'API    
-        fetch ('http://localhost:5678/api/works')
-        .then(response => response.json())
-        .then((projects)=> {
-            for(let i=0; i<projects.length; i++){
-                const article = projects[i]
-                const modalImg = document.createElement("img")
-                modalImg.setAttribute("class", "modal__box__img")
-                modalImg.src = article.imageUrl
-                modalImgContainer.appendChild(modalImg)
-                
-            }
-        })
-       const modalImgIcons = document.createElement("div")
-       modalImgIcons.setAttribute("class", "modal__box__img__icons")
-       modalImgContainer.appendChild(modalImgIcons) 
-       const modalDeleteButton = document.createElement("button")
-       modalDeleteButton.setAttribute("class", article.id) 
-       modalDeleteButton.classList.add("modal__box__delete__btn")
-       modalImgIcons.appendChild(modalDeleteButton)
-       const modalDeleteIcon = document.createElement("i")
-       modalDeleteIcon.classList = "fa-solid fa-trash-can"
-       modalDeleteIcon.setAttribute("id", "modal__delete__icon")
-       modalImgIcons.appendChild(modalDeleteIcon)
-    })
-    }
-   
    

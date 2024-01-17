@@ -88,6 +88,12 @@
 	
 }
 
+.modal__box__img__span{
+	display: flex;
+	justify-content: flex-end;
+	
+}
+
 .modal__box__img {
 	width: 78px;
 	height: 104px;	
@@ -99,12 +105,25 @@
 }
 
 .modal__box__delete__btn{
-	width: 17px;
-	height: 17px;
+	position: absolute;
+	margin-top: 5px;
+	margin-right: 5px;
+	width: 20px;
+	height: 21px;
 	background-color: #000;
+	border: none;
+	border-radius: 20%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.modal__delete__icon{
-	position: absolute;
+#modal__box__img__delete__icon{
 	color: #fff;
+	position: absolute;
+	font-size: x-small;
 }
+
+
+
+
