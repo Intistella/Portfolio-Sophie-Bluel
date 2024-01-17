@@ -63,6 +63,7 @@
     width: 630px;
     height: 688px;
 	display: none;
+	
 }
 
 #modal__exit__icon{
@@ -84,8 +85,9 @@
     flex-wrap: wrap;
 	justify-content: flex-start;
 	gap: 6px;
-	margin: 0 105px 40px 105px;
-	
+	margin: 0 105px 0 105px;
+	padding-bottom: 60px;
+	border-bottom: 2px solid #B3B3B3;
 }
 
 .modal__box__img__span{
@@ -124,6 +126,14 @@
 	font-size: x-small;
 }
 
+.modal__box__add__btn{
+	border: 1px solid #1D6154;
+	border-radius: 20px;
+	background-color: #1D6154;
+	color: #fff;
+	padding: 10px 49px;
+	margin: 25px 200px;
+}
 
 
 

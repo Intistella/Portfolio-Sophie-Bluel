@@ -69,8 +69,13 @@ export function Modal(){
                     DeleteProject(idProject)               
             
                 })
-            }                   
-        })   
+            }                        
+        })  
+    // Création du bouton ajouter une photo  
+        const modalAddButton = document.createElement("button")
+        modalAddButton.setAttribute("class", "modal__box__add__btn")
+        modalAddButton.innerText = "Ajouter une photo"
+        modalBox.appendChild(modalAddButton) 
     })
     }
    
@@ -97,3 +102,6 @@ export function Modal(){
       })
     } 
      
+
+
+    
