@@ -62,11 +62,10 @@
     background-color: #fff;
     width: 630px;
     height: 688px;
-	display: none;
-	
+	display: none;	
 }
 
-#modal__exit__icon{
+.modal__box__exit__icon{
 	display: flex;
 	justify-content: flex-end;
 	margin: 26px 30px;
@@ -74,6 +73,8 @@
 }
 
 .modal__box__title{
+    display: flex;
+	justify-content: center;
 	font-size: 26px;
 	font-weight: 400;
 	text-align: center;
@@ -86,7 +87,7 @@
 	justify-content: flex-start;
 	gap: 6px;
 	margin: 0 105px 0 105px;
-	padding-bottom: 60px;
+	padding-bottom: 40px;
 	border-bottom: 2px solid #B3B3B3;
 }
 
@@ -124,6 +125,11 @@
 	color: #fff;
 	position: absolute;
 	font-size: x-small;
+}
+
+.modal__box__btn__div{
+	padding-top: 30px;
+	border-top: 1px solid #B3B3B3
 }
 
 .modal__box__add__btn{

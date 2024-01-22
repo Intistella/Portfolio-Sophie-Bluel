@@ -53,7 +53,7 @@ export function logedIn(){
     }
     
 //Création de la fonction de déconnexion
-    export function LogedOut(){
+    export function logedOut(){
         logoutLink.addEventListener("click", function(){
             localStorage.clear()
             window.location.href = "../index.html"
