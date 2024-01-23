@@ -53,11 +53,46 @@
 					Galerie photo
 				</span>
 				<div class="modal__box__img__container"></div>
-				<div class="modal_box_btn">
-					<button type="submit" class="modal__box__add__btn">Ajouter une photo</button>
-				</div>
+				<button type="submit" class="modal__box__add__btn">Ajouter une photo</button>
 		</div>
-		<div class="upload__form"></div>
+		<div class="upload__form">
+			<div class="upload__form__icons">
+				<span class="upload__form__previous__icon">
+					<i class="fa-solid fa-arrow-left"></i>
+				</span>
+				<span class="upload__form__exit__icon">
+					<i class="fa-solid fa-xmark"></i>
+				</span>
+			</div>
+			<span class="upload__form__title">
+				Ajout photo
+			</span>
+			<div class="upload__form__content">
+				<div class="upload__form__box">
+					<span class="upload__form__photo__icon">
+						<i class="fa-regular fa-image" style="color: #b9c5cc;"></i>
+					</span>
+					<span class="upload__form__btn">
+						<button class="upload__form__add__btn">+ Ajouter photo</button>
+					</span>
+					<p class="upload__form__text">jpg. png : 4mo max</p>
+				</div>
+				<form class="upload__form__form" action="">
+					<label for="title">Titre</label>
+					<input type="text" name="title" id="title">
+					<label for="category">Catégorie</label>
+					<select name="category" id="category">
+						<option value="empty"></option>
+						<option value="1">Objets</option>
+						<option value="2">Appartements</option>
+						<option value="3">Hotel & Restaurants</option>
+					</select>
+				</form>
+				<span class="upload__form__btn__span">
+					<button type="submit" class="upload__form__submit__btn">Valider</button>
+				</span>
+			</div>
+		</div>
 		<div class="filter">
 			<button class="filter__btn all">Tous</button>
 			<button class="filter__btn objects">Objets</button>

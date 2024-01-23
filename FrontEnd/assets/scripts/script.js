@@ -167,7 +167,10 @@ function uploadProjects(){
 }
 
 function uploadForm(){
-    
+    const uploadForm = document.querySelector(".upload__form")
+    uploadForm.style.display = "block"
+  
+       
 }
 
 modal()

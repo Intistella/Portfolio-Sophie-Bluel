@@ -1,5 +1,5 @@
-import { LogedOut } from "./edit.js"
-    LogedOut()
+import { logedOut } from "./edit.js"
+    logedOut()
 
 //Déclaration des variables
 const loginForm = document.querySelector(".login__form")
