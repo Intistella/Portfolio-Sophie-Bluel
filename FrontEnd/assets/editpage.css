@@ -55,8 +55,8 @@
 
 .modal__box, .upload__form{
     position: absolute;
-	top: 75%;
-	left: 31%;
+	top: 69%;
+	left: 32%;
     border: 1px solid #fff;
     border-radius: 10px;
     background-color: #fff;
@@ -163,14 +163,26 @@
 	background: #E8F1F6;
 	height: 169px;
 	margin-bottom: 30px;
+	box-sizing: border-box;
 }
 
-.upload__form__photo__icon{
+.upload__form__img__icon{
 	display: flex;
     justify-content: center;
     align-items: center;
     font-size: 76px;
 	margin-bottom: 6px;
+}
+
+.upload__form__box__preview{
+	display: flex;
+	justify-content: center;
+}
+
+.upload__form__preview__img{
+	height: 169px;
+	width: 129px;
+	object-fit: cover;
 }
 
 .upload__form__btn{
@@ -179,12 +191,16 @@
 	margin-bottom: 7px;
 }
 
-.upload__form__add__btn{
+#upload__form__add__btn{
 	border: 1px solid #CBD6DC;
 	border-radius: 20px;
 	background-color: #CBD6DC;
 	color: #306685;
 	padding: 10px 33px;	
+}
+
+#upload{
+	display: none;
 }
 
 .upload__form__text{
@@ -247,4 +263,5 @@
 	font-size: 14px;
 	font-weight: 700;
 	font-family: Syne;
+	cursor: pointer;
 }

@@ -46,34 +46,32 @@
 			<span class="edit__span"></span>
 		</div>	
 		<div class="modal__box">
-				<span class="modal__box__exit__icon">
-					<i class="fa-solid fa-xmark"></i>
-				</span>
-				<span class="modal__box__title">
-					Galerie photo
-				</span>
-				<div class="modal__box__img__container"></div>
-				<button type="submit" class="modal__box__add__btn">Ajouter une photo</button>
+			<span class="modal__box__exit__icon">
+				<i class="fa-solid fa-xmark"></i>
+			</span>	
+			<span class="modal__box__title">
+				Galerie photo
+			</span>
+			<div class="modal__box__img__container"></div>
+			<button type="submit" class="modal__box__add__btn">Ajouter une photo</button>
 		</div>
 		<div class="upload__form">
 			<div class="upload__form__icons">
-				<span class="upload__form__previous__icon">
-					<i class="fa-solid fa-arrow-left"></i>
-				</span>
-				<span class="upload__form__exit__icon">
-					<i class="fa-solid fa-xmark"></i>
-				</span>
+				<i class="upload__form__previous__icon fa-solid fa-arrow-left"></i>
+				<i class="upload__form__exit__icon fa-solid fa-xmark"></i>
 			</div>
 			<span class="upload__form__title">
 				Ajout photo
 			</span>
 			<div class="upload__form__content">
 				<div class="upload__form__box">
-					<span class="upload__form__photo__icon">
+					<div class="upload__form__box__preview"></div>
+					<span class="upload__form__img__icon">
 						<i class="fa-regular fa-image" style="color: #b9c5cc;"></i>
 					</span>
 					<span class="upload__form__btn">
-						<button class="upload__form__add__btn">+ Ajouter photo</button>
+						<label for="upload" id="upload__form__add__btn">+ Ajouter photo</label>
+						<input type="file" id="upload" accept="image/jpg image/png" required;>
 					</span>
 					<p class="upload__form__text">jpg. png : 4mo max</p>
 				</div>
