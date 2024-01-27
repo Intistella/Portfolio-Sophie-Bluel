@@ -1,9 +1,7 @@
-import { logedOut } from "./edit.js"
-    logedOut()
+//***************************************Authentification************************************** */
 
-//Déclaration des variables
+function Authentification(){
 const loginForm = document.querySelector(".login__form")
-
 loginForm.addEventListener("submit", async function(event){
     event.preventDefault()
     event.stopImmediatePropagation
@@ -41,3 +39,8 @@ loginForm.addEventListener("submit", async function(event){
         loginError.style.padding = "10px"
     }
 })
+}
+
+//***********************************************Functions call************************* */    
+Authentification()
+
