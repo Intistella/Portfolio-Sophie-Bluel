@@ -177,9 +177,15 @@
 .upload__form__box__preview{
 	display: flex;
 	justify-content: center;
+	border: 3px solid #E8F1F6;
+	background: #E8F1F6;
+	height: 169px;
+	margin-bottom: 30px;
+	display: none;
 }
 
 .upload__form__preview__img{
+	display: flex;
 	height: 169px;
 	width: 129px;
 	object-fit: cover;
@@ -213,6 +219,7 @@
 .upload__form__form{
 	display: flex;
 	flex-direction: column;
+	border-bottom: 2px solid #B3B3B3;
 }
 
 .upload__form__form label{
@@ -225,7 +232,7 @@
 
 .upload__form__form input{
 	height: 51px;
-	margin-bottom: 51px;
+	margin-bottom: 40px;
 	border: none;
 	background: #fff;
 	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.05);
@@ -248,6 +255,7 @@
 }
 
 .upload__form__btn__span{
+	margin-top: 30px;
 	display: flex;
     justify-content: center;
 }

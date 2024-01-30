@@ -2,7 +2,7 @@
 
 const projects = await fetch ('http://localhost:5678/api/works').then(projects => projects.json())
 //Générer les projets 
-function generateProjects (projects){
+export function generateProjects (projects){
     for(let i=0; i<projects.length; i++){
         const article = projects[i]
         
@@ -134,7 +134,6 @@ export function logedIn(){
             headerEdit.style.display = "none"
         })
     }
-
   
 //*****************************************Functions call************************************* */
 generateProjects(projects)
@@ -144,18 +143,17 @@ logedOut()
 import {modal} from "./modal.js"
 modal()
 
-import {modalExit} from "./modal.js"
-modalExit()
-
 import{uploadProjects} from "./modal.js"
 uploadProjects()
 
-import{closeUploadForm} from "./modal.js"
-closeUploadForm()
+import{uploadFormExit} from "./modal.js"
+uploadFormExit()
 
 import{previousUploadForm} from "./modal.js"
 previousUploadForm()
 
-import{projectPreview} from "./modal.js"
-projectPreview()
- 
+import { changeInput } from "./modal.js"
+changeInput()
+
+import { validateForm } from "./modal.js"
+validateForm()

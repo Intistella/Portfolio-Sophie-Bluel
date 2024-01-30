@@ -45,6 +45,9 @@
 			<h2>Mes Projets</h2>
 			<span class="edit__span"></span>
 		</div>	
+		
+		<!-- Modale Box -->
+
 		<div class="modal__box">
 			<span class="modal__box__exit__icon">
 				<i class="fa-solid fa-xmark"></i>
@@ -55,6 +58,9 @@
 			<div class="modal__box__img__container"></div>
 			<button type="submit" class="modal__box__add__btn">Ajouter une photo</button>
 		</div>
+
+		<!-- Formulaire d'upload -->
+
 		<div class="upload__form">
 			<div class="upload__form__icons">
 				<i class="upload__form__previous__icon fa-solid fa-arrow-left"></i>
@@ -64,23 +70,29 @@
 				Ajout photo
 			</span>
 			<div class="upload__form__content">
-				<div class="upload__form__box">
-					<div class="upload__form__box__preview"></div>
+
+				<!-- Formulaire d'ajout de fichier -->
+
+				<div class="upload__form__box__preview"></div>
+				<div class="upload__form__box">	
 					<span class="upload__form__img__icon">
 						<i class="fa-regular fa-image" style="color: #b9c5cc;"></i>
 					</span>
 					<span class="upload__form__btn">
 						<label for="upload" id="upload__form__add__btn">+ Ajouter photo</label>
-						<input type="file" id="upload" accept="image/jpg image/png" required;>
+						<input type="file" id="upload" accept=".jpg, .png" size="4194304";>
 					</span>
 					<p class="upload__form__text">jpg. png : 4mo max</p>
 				</div>
+
+				<!-- Infos Images -->
+
 				<form class="upload__form__form" action="">
 					<label for="title">Titre</label>
 					<input type="text" name="title" id="title">
 					<label for="category">Catégorie</label>
 					<select name="category" id="category">
-						<option value="empty"></option>
+						<option value="blank"></option>
 						<option value="1">Objets</option>
 						<option value="2">Appartements</option>
 						<option value="3">Hotel & Restaurants</option>
@@ -91,6 +103,9 @@
 				</span>
 			</div>
 		</div>
+
+		<!-- Filtres -->
+
 		<div class="filter">
 			<button class="filter__btn all">Tous</button>
 			<button class="filter__btn objects">Objets</button>
