@@ -140,14 +140,11 @@ generateProjects(projects)
 logedIn()
 logedOut()
 
-import {modal} from "./modal.js"
-modal()
+import {openModal, openUploadForm} from "./modal.js"
+openModal()
+openUploadForm()
 
-import{uploadProjects} from "./modal.js"
-uploadProjects()
 
-import{uploadFormExit} from "./modal.js"
-uploadFormExit()
 
 import{previousUploadForm} from "./modal.js"
 previousUploadForm()
@@ -155,5 +152,4 @@ previousUploadForm()
 import { changeInput } from "./modal.js"
 changeInput()
 
-import { validateForm } from "./modal.js"
-validateForm()
+

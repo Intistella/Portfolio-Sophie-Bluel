@@ -6,7 +6,7 @@ const modalBox = document.querySelector(".modal__box")
 const modalImgContainer = document.querySelector(".modal__box__img__container")
 
 // Création de la fonction Modal
-export function modal (){
+export function openModal (){
     const editSpan = document.querySelector(".edit__span")   
     editSpan.addEventListener("click", async function(event){
         event.preventDefault
@@ -88,12 +88,18 @@ function deleteProjects(article){
 //******************************************************************* UPLOAD FORM************************************************ */
 
 //Ouverture du formulaure d'upload 
-export function uploadProjects(){
+const uploadForm = document.querySelector(".upload__form")
+export function openUploadForm(){
     const addProjectbtn = document.querySelector(".modal__box__add__btn")
     addProjectbtn.addEventListener("click", function(event){
         event.preventDefault()
         uploadForm.style.display = "block"   
     })  
+    uploadFormExit()
+    checkForm()
+    checkInput()
+    changeBtn()
+    
 }
 
 // fonction pour fermer le formulaire d'import photo
@@ -104,14 +110,17 @@ export function uploadFormExit(){
         uploadForm.style.display = "none"
         modalBox.style.display = "none"
         document.body.style.backgroundColor = "#fff" 
-        location.reload()
     })
+   
 }
 
 // Fermeture des pop-up au click 
 document.addEventListener("click", function(event){
-    if(event.target === modalBox || event.target === uploadForm)  
-    return uploadFormExit()
+    const modals = document.querySelector(".modals")
+    if(event.target == modals ){
+        modalExit()
+        uploadFormExit()
+    }
 })
 
 //Fonction pour revenir sur la modale box
@@ -120,25 +129,107 @@ export function previousUploadForm(){
     previousBtn.addEventListener("click", function(event){
         event.preventDefault()
         uploadForm.style.display = "none" 
-   
     })
 }
 
 // Fonctions pour la création du preview
-const uploadForm = document.querySelector(".upload__form")
-const previewImg = document.createElement('img')
-const previewImgDiv = document.querySelector(".upload__form__box__preview")
-
+const elementToHide = document.querySelector(".upload__form__box") 
 export function changeInput (){
-    const inputImg = document.getElementById("upload")
+    const upload = document.getElementById("upload") 
+    const previewImg = document.querySelector(".upload__form__preview__img")
+    const previewImgDiv = document.querySelector(".upload__form__box__preview") 
 
     // Event listener au click de l'input file 
-    inputImg.addEventListener("change", function(event) {
+    upload.addEventListener("change", function() {
+        const selectedFile = upload.files[0]  
+        const reader = new FileReader()
+        reader.addEventListener("load", () =>{
+            previewImg.setAttribute("src", reader.result)
+            previewImgDiv.style.display = "flex"
+            elementToHide.style.display = "none"
+        })
+        reader.readAsDataURL(selectedFile)
+    })
+}   
+
+// Fonction de envoi du formulaire
+async function postProject(){
+    const title = document.querySelector("[name = title]").value
+    const category = document.querySelector("[name = category]").value
+    const inputImage = document.querySelector("#upload").value
+    
+    // Compilation du formulaire et envoi vers l'API
+    let formData = new FormData()
+    formData.append("image", inputImage)
+    formData.append("title", title)
+    formData.append("category", category)
+    const token = localStorage.getItem("token")
+
+    await fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers:new Headers({
+            "Authorization": `Bearer ${token}`,
+            "Accept": "application/json",  
+            "content-Type" : "multipart/formData"
+        }),
+        body: formData
+    })
+    .then((response) =>{
+        if(response.ok){
+            return importProjects()
+        }
+        else{
+            throw new Error("Erreur de transfert")
+        }
+    })
+    .then ((data) => {
+        uploadFormExit()
+        document.querySelector(".upload__form__content").reset()
+        elementToHide.style.display = "block"
+        previewImgDiv.style.display = "none"
+        uploadFormExit()
+        importProjects()
+        modal()
+    })
+    .catch ((error) => {
+        console.error(error)
+    })  
+  
+}   
+
+// Vérification des éléments du formulaire
+const uploadFormSubmitBtn = document.querySelector(".upload__form__submit__btn")
+function checkForm(){
+    uploadFormSubmitBtn.addEventListener("click", function(event){
+        event.preventDefault()    
+        const image = document.getElementById("upload")
+        const title = document.getElementById("title")
+        const category = document.getElementById("category")
+
+        if(image.value !== "" && title.value !== "" && category.value !== ""){
+            postProject()
+            uploadFormSubmitBtn.style.backgroundColor = "#1D6154"
+            uploadFormSubmitBtn.style.color = "#ffffff";
+        }
+        if(image.value == ""){
+            alert("Veuillez sélectionner une image")
+        }else if(title.value == ""){
+            alert("Veuillez saisir un titre")
+        }else if(category.value == ""){
+            alert("Veuillez sélectionner une catégorie")
+        }
+})
+}
+
+function checkInput(){
+    const upload = document.getElementById("upload")
+    upload.addEventListener("input", function(event){
+        event.preventDefault()
         const selectedFile = event.target.files[0]
         const allowedExtensions = [".jpg", ".jpeg",".png" ]  
         const allowedSize = 4 * 1024 * 1024
         if (selectedFile !== undefined && allowedExtensions.indexOf(selectedFile) && selectedFile.size <= allowedSize){
-            projectPreview(selectedFile)
+            changeInput(selectedFile)
             return
         }else if(selectedFile.size > allowedSize){
             alert("Votre fichier est trop volumineux.") 
@@ -148,76 +239,19 @@ export function changeInput (){
             return
         }
     })
-}   
-function projectPreview(){
-    
-      // Event listener au click de l'input file
-        const elementToHide = document.querySelector(".upload__form__box")
-        elementToHide.style.display = "none"
-        previewImgDiv.style.display = "block"
-
-        // Création du preview
-        previewImg.classList.add("upload__form__preview__img")
-        let upload = document.getElementById("upload").files[0]
-
-        // Création et attribution de l'URL du fichier à l'image
-        const urlArticle = URL.createObjectURL(upload)
-        previewImg.src = urlArticle
-        previewImgDiv.appendChild(previewImg)    
 }
 
-// Fonction de envoi du formulaire
-let upload = document.getElementById("upload").files[0] 
-let title = document.getElementById("title").value
-let category = document.querySelector("select")
+function changeBtn(){
+    const image = document.getElementById("upload")
+    const title = document.getElementById("title")
+    const category = document.getElementById("category")
+    if (title.value !== "" && category.value !== "" && image.value !== ""){
+        uploadFormSubmitBtn.style.backgroundColor = "#1D6154"
+        uploadFormSubmitBtn.style.color = "#ffffff"
+      } else {
+        uploadFormSubmitBtn.style.backgroundColor = ""
+        uploadFormSubmitBtn.style.color = ""
+      }
+    }
 
-function submitForm(){
-
-       // Compilation du formulaire et envoi vers l'API
-       let formData = new FormData()
-       formData.append("image", upload)
-       formData.append("title", title)
-       formData.append("category", category)
-       const token = localStorage.getItem("token")
-       fetch("http://localhost:5678/api/works", {
-            method: "POST",
-            headers: new Headers({
-                "Authorization": `Bearer ${token}`,
-                "Accept": "application/json",
-                "content-Type": "multipart/formData"
-            }),
-            body: formData
-       })
-       .then((response) =>{
-            if(response.ok){
-                return response.json()
-            }else{
-                throw new Error ("Erreur lors du transfert")
-            }
-       })
-       .then ((data) => {
-        uploadFormExit()
-        document.querySelector(".upload__form__content").reset()
-        elementToHide.style.display = "block"
-        previewImgDiv.style.display = "none"
-        modal(data)
-        importProjects(data)
-        generateProjects(data) 
-        
-        })
-       .catch ((error) => {
-        console.error(error)
-       })
-}
-import {generateProjects} from "./script.js"
-
-// fonction pour la validation du formulaire
-let uploadFormSubmitBtn = document.querySelector(".upload__form__submit__btn")
-export function validateForm(){
-    uploadFormSubmitBtn.addEventListener("click",function(event){
-        event.preventDefault()
-            submitForm()  
-    })
-}
-   
-   
+// Reset du formulaire après fermeture ou retour modal
