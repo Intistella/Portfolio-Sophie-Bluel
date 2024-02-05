@@ -146,10 +146,3 @@ openUploadForm()
 
 
 
-import{previousUploadForm} from "./modal.js"
-previousUploadForm()
-
-import { changeInput } from "./modal.js"
-changeInput()
-
-
