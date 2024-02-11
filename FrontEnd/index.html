@@ -76,22 +76,24 @@
 					<!-- Formulaire d'ajout de fichier -->
 
 					<div class="upload__form__box__preview">
-						<img class="upload__form__preview__img" src="" alt="">
+						<img class="upload__form__preview__img" src="#" alt="">
 					</div>
 					<div class="upload__form__box">	
-						<span class="upload__form__img__icon">
+						<div class="upload__form__img__icon">
 							<i class="fa-regular fa-image" style="color: #b9c5cc;"></i>
-						</span>
-						<div class="upload__form__btn">
-							<label for="upload" id="upload__form__add__btn">+ Ajouter photo</label>
-							<input type="file" id="upload" accept="image/jpg, image.jpeg, image/png";>
 						</div>
+						<form class="upload__form__btn" action="#">
+							<label for="upload" id="upload__form__add__btn">+ Ajouter photo
+								<input type="file" id="upload" name="upload" accept=".jpg, .jpeg, .png">
+							</label>
+							
+						</form>
 						<p class="upload__form__text">jpg. png : 4mo max</p>
 					</div>
 
 					<!-- Infos Images -->
 
-					<form class="upload__form__form" action="">
+					<form class="upload__form__form" action="#">
 						<label for="title">Titre</label>
 						<input type="text" name="title" id="title">
 						<label for="category">Catégorie</label>

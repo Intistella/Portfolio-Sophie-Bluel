@@ -99,8 +99,6 @@ export function openUploadForm(){
     previousUploadForm()
     checkForm()
     checkInput() 
-    extractElement()
-    changeBtn()
 }
 
 //Fonction pour fermer l'upload form
@@ -144,35 +142,14 @@ function checkInput(){
     })
 }
 
-// Fonctions pour le changement de l'input
-const elementToHide = document.querySelector(".upload__form__box") 
-function changeInput (){
-    const upload = document.getElementById("upload") 
-    const previewImg = document.querySelector(".upload__form__preview__img")
-    const previewImgDiv = document.querySelector(".upload__form__box__preview") 
-
-    // Event listener au click de l'input file 
-    upload.addEventListener("change", function() {
-        const selectedFile = upload.files[0]  
-        const reader = new FileReader()
-        reader.addEventListener("load", () =>{
-            previewImg.setAttribute("src", reader.result)
-            previewImgDiv.style.display = "flex"
-            elementToHide.style.display = "none"
-        })
-        reader.readAsDataURL(selectedFile)
-    })
-} 
-
 // Vérification des éléments du formulaire
 const uploadFormSubmitBtn = document.querySelector(".upload__form__submit__btn")
 function checkForm(){
+    const image = document.getElementById("upload")
+    const title = document.getElementById("title")
+    const category = document.getElementById("category")
     uploadFormSubmitBtn.addEventListener("click", function(event){
         event.preventDefault()    
-        const image = document.getElementById("upload")
-        const title = document.getElementById("title")
-        const category = document.getElementById("category")
-
         if(image.value !== "" && title.value !== "" && category.value !== ""){
             postProject()
         }
@@ -183,35 +160,40 @@ function checkForm(){
         }else if(category.value == ""){
             alert("Veuillez sélectionner une catégorie")
         }
-})
+    })
 }
 
 // Foncttion pour le changement de la couleur du bouton valider
 function changeBtn(){
-    let selectedImage = extractImage()
-    let selectedTitle = document.getElementById("title").value
-    let selectedCategory = document.getElementById("category").value
-    if( selectedImage !== undefined && selectedTitle !== undefined && selectedCategory !== undefined){
-        uploadFormSubmitBtn.style.backgroundColor = "#1D6154"
-        uploadFormSubmitBtn.style.color = "#ffffff"
-    }else{
-        uploadFormSubmitBtn.style.backgroundColor = ""
-        uploadFormSubmitBtn.style.color = ""
-    }
-       
-} 
+    uploadFormSubmitBtn.style.backgroundColor = "#1D6154"
+    uploadFormSubmitBtn.style.color = "#ffffff"
+}  
 
-// fonction pour extraire les éléments du formulaire
-function extractImage(){
-    let upload = document.getElementById("upload")
-    upload.addEventListener("input", function(event){
-        const selectedImage = event.target.files[0]
-        console.log(selectedImage)
+// Fonctions pour le changement de l'input
+const elementToHide = document.querySelector(".upload__form__box") 
+function changeInput(){  
+    const upload = document.getElementById("upload")
+    const previewImg = document.querySelector(".upload__form__preview__img")
+    const previewImgDiv = document.querySelector(".upload__form__box__preview") 
+
+    // Event listener au click de l'input file 
+        upload.addEventListener("change", function() {
+        const selectedFile = upload.files[0]  
+        const reader = new FileReader()
+        reader.addEventListener("load", () =>{
+            previewImg.setAttribute("src", reader.result)
+            previewImgDiv.style.display = "flex"
+            elementToHide.style.display = "none"
+        })
+        reader.readAsDataURL(selectedFile)
+        return 
     })
-}
-   
-function extractElement(){
-    let selectedImage = extractImage()
+}     
+
+// Fonction pour ajouter un projet
+function postProject(){
+    let selectedImage = document.getElementById("upload").files[0]
+    changeInput(selectedImage)
     let selectedTitle = document.getElementById("title").value
     let selectedCategory = document.getElementById("category").value
     // Compilation du formulaire 
@@ -219,11 +201,7 @@ function extractElement(){
     formData.append("image", selectedImage)
     formData.append("title", selectedTitle)
     formData.append("category", selectedCategory)
-}      
-
-// Fonction pour ajouter un projet
-function postProject(){
-    let formData = extractElement()
+    console.log(formData)
     const token = localStorage.getItem("token")
     console.log(token)
     fetch("http://localhost:5678/api/works", {
@@ -233,27 +211,23 @@ function postProject(){
         }),
         body: formData
     })
-    /*.then((response) =>{
-        /*if(response.ok){
+    .then((response) =>{
+        if(response.ok){
             return response.json()  
         }
         else{  
             throw new Error("Erreur de transfert")
         }
-    })*/
-    /*.then ((data) => {
-        /*
-        document.querySelector(".upload__form__content").reset()
-        elementToHide.style.display = "block"
-        previewImgDiv.style.display = "none"
-        uploadFormExit()
+    })
+    .then ((data) => {  
         importProjects()
-        modal()
-    })*/
-    /*.catch ((error) => {
+        uploadFormExit()
+        location.reload()
+        alert("Projet ajouté avec succès")
+    })
+    .catch ((error) => {
         console.error(error)
-    })  */
-  
+    })  
 }
     
 
