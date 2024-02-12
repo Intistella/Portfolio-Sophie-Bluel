@@ -94,11 +94,12 @@ export function openUploadForm(){
     addProjectbtn.addEventListener("click", function(event){
         event.preventDefault()
         uploadForm.style.display = "block"   
-    })  
+    }) 
     uploadFormExit()
     previousUploadForm()
     checkForm()
     checkInput() 
+    changeBtn()
 }
 
 //Fonction pour fermer l'upload form
@@ -109,7 +110,12 @@ function uploadFormExit(){
         uploadForm.style.display = "none"
         modalBox.style.display = "none"
         document.body.style.backgroundColor = "#fff" 
+        resetUploadForm()
     })
+}
+
+function exitOnClick(){
+
 }
 
 //Fonction pour revenir sur la modale box
@@ -118,7 +124,19 @@ function previousUploadForm(){
     previousBtn.addEventListener("click", function(event){
         event.preventDefault()
         uploadForm.style.display = "none" 
+        resetUploadForm()
     })
+}
+
+// Reset Form   
+function resetUploadForm() {
+    const title = document.getElementById("title")
+    const category = document.getElementById("category")
+    const previewImgDiv = document.querySelector(".upload__form__box__preview") 
+    elementToHide.style.display = "flex"
+    previewImgDiv.style.display = "none"  
+    title.value = ""
+    category.value = "" 
 }
 
 // Vérification de l'input
@@ -152,8 +170,7 @@ function checkForm(){
         event.preventDefault()    
         if(image.value !== "" && title.value !== "" && category.value !== ""){
             postProject()
-        }
-        if(image.value == ""){
+        }if(image.value == ""){
             alert("Veuillez sélectionner une image")
         }else if(title.value == ""){
             alert("Veuillez saisir un titre")
@@ -164,9 +181,22 @@ function checkForm(){
 }
 
 // Foncttion pour le changement de la couleur du bouton valider
+const image = document.getElementById("upload")
+const title = document.getElementById("title")
+const category = document.getElementById("category")
+title.addEventListener("input", changeBtn)
+category.addEventListener("change", changeBtn)
 function changeBtn(){
-    uploadFormSubmitBtn.style.backgroundColor = "#1D6154"
-    uploadFormSubmitBtn.style.color = "#ffffff"
+    const selectedImage = image.files[0]
+    const selectedTitle = title.value !==""
+    const selectedCategory = category.value !==""
+    if(selectedImage && selectedTitle && selectedCategory){
+        uploadFormSubmitBtn.classList.add("validation__btn")
+        return true
+  }else{
+        uploadFormSubmitBtn.setAttribute("class", "upload__form__submit__btn")
+        return false
+    }
 }  
 
 // Fonctions pour le changement de l'input

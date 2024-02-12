@@ -88,7 +88,7 @@
 	gap: 6px;
 	margin: 0 105px 0 105px;
 	padding-bottom: 40px;
-	border-bottom: 2px solid #B3B3B3;
+	border-bottom: 1px solid #B3B3B3;
 }
 
 .modal__box__img__span{
@@ -219,7 +219,7 @@
 .upload__form__form{
 	display: flex;
 	flex-direction: column;
-	border-bottom: 2px solid #B3B3B3;
+	border-bottom: 1px solid #B3B3B3;
 }
 
 .upload__form__form label{
@@ -264,7 +264,7 @@
 	display: flex;
 	justify-content: center;
 	border: none;
-	background: #A7A7A7;
+	background-color: #A7A7A7;
 	border-radius: 60px;
 	padding: 10px 80px;
 	color: #fff;
@@ -274,3 +274,16 @@
 	cursor: pointer;
 }
 
+.validation__btn{
+	background-color: #1D6154;
+	display: flex;
+	justify-content: center;
+	border: none;
+	border-radius: 60px;
+	padding: 10px 80px;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 700;
+	font-family: Syne;
+	cursor: pointer;
+}
