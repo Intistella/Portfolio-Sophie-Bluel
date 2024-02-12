@@ -140,9 +140,10 @@ generateProjects(projects)
 logedIn()
 logedOut()
 
-import {openModal, openUploadForm} from "./modal.js"
+import {openModal, openUploadForm, exitOnClick} from "./modal.js"
 openModal()
 openUploadForm()
+exitOnClick()
 
 
 

@@ -4,6 +4,7 @@
 const projects = await fetch ('http://localhost:5678/api/works').then(projects => projects.json())
 const modalBox = document.querySelector(".modal__box")
 const modalImgContainer = document.querySelector(".modal__box__img__container")
+const exitModals = document.querySelector(".exit__modals")
 
 // Création de la fonction Modal
 export function openModal (){
@@ -12,14 +13,15 @@ export function openModal (){
         event.preventDefault
     // Affichage de la modale 
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.30)"
-        modalBox.style.display = "block"       
+        modalBox.style.display = "block"    
+        exitModals.style.display = "block" 
     }) 
     modalExit()
     importProjects()    
 }
 
 // Création de la fontion de fermeture de la modale
-export function modalExit(){
+function modalExit(){
     const xMark = document.querySelector(".modal__box__exit__icon")
     // Event listener pour la bouton fermer    
         xMark.addEventListener("click", function(event){
@@ -31,8 +33,7 @@ export function modalExit(){
 }
 
 // Gestion des projets (Import et suppression))  
-
-export function importProjects(){
+function importProjects(){
 for(let i=0; i<projects.length; i++){
     const article = projects[i]   
     // Création du Span contenant les éléments de la modale 
@@ -81,6 +82,10 @@ function deleteProjects(article){
                 alert("Projet non supprimé")
             }
             }) 
+        .then((data) => {
+            modalExit()
+            location.reload()
+        })    
             .catch (error => {
                 alert(error)
             }) 
@@ -94,6 +99,7 @@ export function openUploadForm(){
     addProjectbtn.addEventListener("click", function(event){
         event.preventDefault()
         uploadForm.style.display = "block"   
+        exitModals.style.display = "block"
     }) 
     uploadFormExit()
     previousUploadForm()
@@ -114,11 +120,19 @@ function uploadFormExit(){
     })
 }
 
-function exitOnClick(){
-
+// Fonction pour sortir des modales avec un click sur le background
+export function exitOnClick(){  
+    document.addEventListener("click", function(event){
+        const clickedElement = event.target
+        if(clickedElement == exitModals){
+            uploadForm.style.display = "none"
+            modalBox.style.display = "none"
+            exitModals.style.display = "none" 
+        }
+    })
 }
 
-//Fonction pour revenir sur la modale box
+// Fonction pour revenir sur la modale box
 function previousUploadForm(){
     const previousBtn = document.querySelector(".upload__form__previous__icon")
     previousBtn.addEventListener("click", function(event){
