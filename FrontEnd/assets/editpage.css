@@ -74,6 +74,8 @@
     width: 630px;
     height: 688px;
 	display: none;	
+	font: initial;
+	font-size: initial;
 }
 
 .modal__box__exit__icon{
@@ -214,6 +216,9 @@
 	background-color: #CBD6DC;
 	color: #306685;
 	padding: 10px 33px;	
+	font-family: 'Work Sans';
+	font-size: 1em;
+	font-weight: 500;
 }
 
 #upload{
@@ -223,8 +228,11 @@
 .upload__form__text{
 	display: flex;
 	justify-content: center;
-	font-size: 10px;
-	font-weight: 400;
+	font: initial;
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 400 !important;
+	font-size: 10px !important;
 }
 
 .upload__form__form{

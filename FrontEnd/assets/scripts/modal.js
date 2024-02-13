@@ -28,6 +28,7 @@ function modalExit(){
         event.preventDefault
         modalBox.style.display = "none"
         document.body.style.backgroundColor = "#fff" 
+        exitModals.style.display = "none" 
         location.reload()
      })
 }
@@ -116,6 +117,7 @@ function uploadFormExit(){
         uploadForm.style.display = "none"
         modalBox.style.display = "none"
         document.body.style.backgroundColor = "#fff" 
+        exitModals.style.display = "none" 
         resetUploadForm()
     })
 }
@@ -128,6 +130,7 @@ export function exitOnClick(){
             uploadForm.style.display = "none"
             modalBox.style.display = "none"
             exitModals.style.display = "none" 
+            document.body.style.backgroundColor = "#fff" 
         }
     })
 }
