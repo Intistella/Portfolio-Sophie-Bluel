@@ -75,7 +75,7 @@
     height: 688px;
 	display: none;	
 	font: initial;
-	font-size: initial;
+	font-family: 'Work Sans';
 }
 
 .modal__box__exit__icon{
@@ -88,6 +88,7 @@
 .modal__box__title, .upload__form__title{
     display: flex;
 	justify-content: center;
+	font-family: 'Work Sans';
 	font-size: 26px;
 	font-weight: 400;
 	text-align: center;
@@ -139,7 +140,6 @@
 	position: absolute;
 	font-size: x-small;
 }
-
 
 .modal__box__add__btn{
 	border: 1px solid #1D6154;

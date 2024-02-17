@@ -1,11 +1,11 @@
-//********************************************** GENERATE & FILTER PROJECTS*************************************************** */
-
-const projects = await fetch ('http://localhost:5678/api/works').then(projects => projects.json())
+//********************************************** GET & FILTER PROJECTS*************************************************** */
 //Générer les projets 
-export function generateProjects (projects){
+const projects = await fetch ('http://localhost:5678/api/works').then(projects => projects.json())
+export async function getProjects(projects){
+    document.querySelector(".gallery").innerHTML = ""
+
     for(let i=0; i<projects.length; i++){
         const article = projects[i]
-        
         // Récupération de l'élément du DOM qui accueillera les projets
         const divGallery = document.querySelector(".gallery")
        
@@ -22,13 +22,9 @@ export function generateProjects (projects){
         divGallery.appendChild(projectElement)
         projectElement.appendChild(imageElement)
         projectElement.appendChild(nameElement)
+    }
 }
-}
-
-// Suppression des éléments HTML
-document.querySelector(".gallery").innerHTML = ""
-
-// Appel de la fonction qui génère les projets à partir de l'API
+getProjects(projects)
 
 //Créer le filtre Objets
 const filterObjects = document.querySelector(".objects")
@@ -36,8 +32,9 @@ filterObjects.addEventListener("click", function(){
     const filteredElement = projects.filter(function(project){
         return project.category.name === "Objets"
     })
-    document.querySelector(".gallery").innerHTML=""
-    generateProjects(filteredElement)    
+    document.querySelector(".gallery").innerHTML="" 
+    getProjects(filteredElement)
+    console.log(filteredElement)
 })
 
 //Créer le filtre Appartements
@@ -47,7 +44,8 @@ filterFlats.addEventListener("click", function(){
         return project.category.name === "Appartements"
     })
     document.querySelector(".gallery").innerHTML=""
-    generateProjects(filteredElement)    
+    getProjects(filteredElement) 
+    console.log(filteredElement)    
 })
 
 //Créer le filtre Hôtels et restaurants
@@ -57,14 +55,15 @@ filterHotels.addEventListener("click", function(){
         return project.category.name === "Hotels & restaurants"
     })
     document.querySelector(".gallery").innerHTML=""
-    generateProjects(filteredElement)    
+    getProjects(filteredElement)  
+    console.log(filteredElement)   
 })
 
 //Créer le filtre tous
 const filterAll = document.querySelector(".all")
 filterAll.addEventListener("click", function(){
     document.querySelector(".gallery").innerHTML=""
-    generateProjects(projects)    
+    getProjects(projects)    
 })
 
 //**************************************LogedIn********************************************* */
@@ -112,34 +111,30 @@ export function logedIn(){
     editSpan.appendChild(editBtn)
     editBtn.appendChild(editBtnIcon)
     editBtn.appendChild(editBtnText)   
-    
     }else{
         loginLink.style.display = "block"
         logoutLink.style.display = "none"
         filterBtn.style.display = "flex"
         headerEdit.style.display = "none"
     }
-    }
+}
+logedIn()
 
 //****************************************LogOut*************************************** */ 
     
 //Création de la fonction de déconnexion
-    export function logedOut(){
-        logoutLink.addEventListener("click", function(){
-            localStorage.clear()
-            window.location.href = "../index.html"
-            loginLink.style.display = "block"
-            logoutLink.style.display = "none"
-            filterBtn.style.display = "block"
-            headerEdit.style.display = "none"
-        })
-    }
-  
-//*****************************************Functions call************************************* */
-generateProjects(projects)
-logedIn()
+export function logedOut(){
+    logoutLink.addEventListener("click", function(){
+        localStorage.clear()
+        window.location.href = "../index.html"
+        loginLink.style.display = "block"
+        logoutLink.style.display = "none"
+        filterBtn.style.display = "block"
+        headerEdit.style.display = "none"
+    })
+}
 logedOut()
-
+//*****************************************Functions call************************************* */
 import {openModal, openUploadForm, exitOnClick} from "./modal.js"
 openModal()
 openUploadForm()

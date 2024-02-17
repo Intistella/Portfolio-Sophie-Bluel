@@ -1,6 +1,5 @@
-
+import{getProjects} from "./script.js"
 //*************************************************** MODAL BOX **********************************************************
-
 const projects = await fetch ('http://localhost:5678/api/works').then(projects => projects.json())
 const modalBox = document.querySelector(".modal__box")
 const modalImgContainer = document.querySelector(".modal__box__img__container")
@@ -14,57 +13,55 @@ export function openModal (){
     // Affichage de la modale 
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.30)"
         modalBox.style.display = "block"    
-        exitModals.style.display = "block" 
-    }) 
+        exitModals.style.display = "block"    
+    })    
+    
+    importProjects() 
     modalExit()
-    importProjects()    
 }
 
 // Création de la fontion de fermeture de la modale
-function modalExit(){
-    const xMark = document.querySelector(".modal__box__exit__icon")
-    // Event listener pour la bouton fermer    
-        xMark.addEventListener("click", function(event){
-        event.preventDefault
-        modalBox.style.display = "none"
-        document.body.style.backgroundColor = "#fff" 
-        exitModals.style.display = "none" 
-        location.reload()
-     })
+const xMark = document.querySelector(".modal__box__exit__icon")
+xMark.addEventListener("click", modalExit)
+function modalExit(){   
+    modalBox.style.display = "none"
+    document.body.style.backgroundColor = "#fff" 
+    exitModals.style.display = "none"     
 }
 
 // Gestion des projets (Import et suppression))  
 function importProjects(){
-for(let i=0; i<projects.length; i++){
-    const article = projects[i]   
-    // Création du Span contenant les éléments de la modale 
-        const modalImgSpan = document.createElement("span")
-        modalImgSpan.classList.add("modal__box__img__span")
-        modalImgSpan.setAttribute("id", article.id) 
-        modalImgContainer.appendChild(modalImgSpan)
+    document.querySelector(".modal__box__img__container").innerHTML = ""
+    for(let i=0; i<projects.length; i++){
+        const article = projects[i]   
+        // Création du Span contenant les éléments de la modale 
+            const modalImgSpan = document.createElement("span")
+            modalImgSpan.classList.add("modal__box__img__span")
+            modalImgSpan.setAttribute("id", article.id) 
+            modalImgContainer.appendChild(modalImgSpan)
    
-    //Création des balises images  
-        const modalImg = document.createElement("img")
-        modalImg.setAttribute("class", "modal__box__img")
-        modalImg.src = article.imageUrl
-        modalImgSpan.appendChild(modalImg)     
+        //Création des balises images  
+            const modalImg = document.createElement("img")
+            modalImg.setAttribute("class", "modal__box__img")
+            modalImg.src = article.imageUrl
+            modalImgSpan.appendChild(modalImg)     
     
-    // Création du bouton supprimer
-        const modalDeleteButton = document.createElement("button") 
-        modalDeleteButton.setAttribute("id", article.id)
-        modalDeleteButton.classList.add("modal__box__delete__btn")
-        modalImgSpan.appendChild(modalDeleteButton)
-        const modalDeleteIcon = document.createElement("i") 
-        modalDeleteIcon.classList = "fa-solid fa-trash-can fa-2xs"
-        modalDeleteIcon.setAttribute("id", "modal__box__img__delete__icon")
-        modalDeleteButton.appendChild(modalDeleteIcon)
+        // Création du bouton supprimer
+            const modalDeleteButton = document.createElement("button") 
+            modalDeleteButton.setAttribute("id", article.id)
+            modalDeleteButton.classList.add("modal__box__delete__btn")
+            modalImgSpan.appendChild(modalDeleteButton)
+            const modalDeleteIcon = document.createElement("i") 
+            modalDeleteIcon.classList = "fa-solid fa-trash-can fa-2xs"
+            modalDeleteIcon.setAttribute("id", "modal__box__img__delete__icon")
+            modalDeleteButton.appendChild(modalDeleteIcon)
       
-    // Event listener pour le bouton de suppression 
-    modalDeleteButton.addEventListener("click", function(event){
-        event.preventDefault()
-        modalImgSpan.parentNode.removeChild(modalImgSpan)
-        deleteProjects(article.id)
-    })
+        // Event listener pour le bouton de suppression 
+            modalDeleteButton.addEventListener("click", function(event){
+            event.preventDefault()
+            modalImgSpan.parentNode.removeChild(modalImgSpan)
+            deleteProjects(article.id)
+        })
     }
 }
 
@@ -83,13 +80,13 @@ function deleteProjects(article){
                 alert("Projet non supprimé")
             }
             }) 
-        .then((data) => {
-            modalExit()
-            location.reload()
-        })    
-            .catch (error => {
-                alert(error)
-            }) 
+        .then(() => {
+            getProjects(projects)
+            modalExit()   
+        }) 
+        .catch (error => {
+            alert(error)
+        }) 
 }
 //******************************************************************* UPLOAD FORM************************************************ */
 
@@ -110,16 +107,13 @@ export function openUploadForm(){
 }
 
 //Fonction pour fermer l'upload form
+const formXmark = document.querySelector(".upload__form__exit__icon")
+formXmark.addEventListener("click", uploadFormExit)
 function uploadFormExit(){
-    const formXmark = document.querySelector(".upload__form__exit__icon")
-    formXmark.addEventListener("click", function(event){
-        event.preventDefault()
-        uploadForm.style.display = "none"
-        modalBox.style.display = "none"
-        document.body.style.backgroundColor = "#fff" 
-        exitModals.style.display = "none" 
-        resetUploadForm()
-    })
+    uploadForm.style.display = "none"
+    modalExit()
+    exitModals.style.display = "none" 
+    resetUploadForm()  
 }
 
 // Fonction pour sortir des modales avec un click sur le background
@@ -127,8 +121,8 @@ export function exitOnClick(){
     document.addEventListener("click", function(event){
         const clickedElement = event.target
         if(clickedElement == exitModals){
-            uploadForm.style.display = "none"
-            modalBox.style.display = "none"
+            uploadFormExit()
+            modalExit()
             exitModals.style.display = "none" 
             document.body.style.backgroundColor = "#fff" 
         }
@@ -138,9 +132,8 @@ export function exitOnClick(){
 // Fonction pour revenir sur la modale box
 function previousUploadForm(){
     const previousBtn = document.querySelector(".upload__form__previous__icon")
-    previousBtn.addEventListener("click", function(event){
-        event.preventDefault()
-        uploadForm.style.display = "none" 
+    previousBtn.addEventListener("click", function(){
+        uploadForm.style.display = "none"
         resetUploadForm()
     })
 }
@@ -167,7 +160,7 @@ function checkInput(){
         if (selectedFile !== undefined && allowedExtensions.indexOf(selectedFile) && selectedFile.size <= allowedSize){
             changeInput(selectedFile)
             return
-        }else if(selectedFile.size > allowedSize){
+        }else if(selectedFile && selectedFile.size > allowedSize ){
             alert("Votre fichier est trop volumineux.") 
             return
         }else if(!selectedFile.name.includes(allowedExtensions)){
@@ -248,9 +241,7 @@ function postProject(){
     formData.append("image", selectedImage)
     formData.append("title", selectedTitle)
     formData.append("category", selectedCategory)
-    console.log(formData)
     const token = localStorage.getItem("token")
-    console.log(token)
     fetch("http://localhost:5678/api/works", {
         method: "POST",
         headers: new Headers({
@@ -260,21 +251,22 @@ function postProject(){
     })
     .then((response) =>{
         if(response.ok){
-            return response.json()  
+            return response.json()    
         }
         else{  
             throw new Error("Erreur de transfert")
         }
     })
-    .then ((data) => {  
-        importProjects()
+    .then (() => { 
+        getProjects(projects)  
+        importProjects() 
+        resetUploadForm()
         uploadFormExit()
-        location.reload()
         alert("Projet ajouté avec succès")
     })
     .catch ((error) => {
         console.error(error)
-    })  
+    })    
 }
-    
+
 
