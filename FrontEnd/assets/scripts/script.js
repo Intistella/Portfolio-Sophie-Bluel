@@ -1,30 +1,42 @@
 //********************************************** GET & FILTER PROJECTS*************************************************** */
 //Générer les projets 
-const projects = await fetch ('http://localhost:5678/api/works').then(projects => projects.json())
-export async function getProjects(projects){
-    document.querySelector(".gallery").innerHTML = ""
+export async function getProjects(){
+    await fetch ('http://localhost:5678/api/works')
+    .then(response => response.json())
+    .then((works) =>{
+        displayProjects(works)
+})
+}
+getProjects()
+
+export function displayProjects(projects){
+    // Récupération de l'élément du DOM qui accueillera les projets
+    const divGallery = document.querySelector(".gallery")
+
+    // Effacer le contenu de la div
+    divGallery.innerHTML = ""
 
     for(let i=0; i<projects.length; i++){
-        const article = projects[i]
-        // Récupération de l'élément du DOM qui accueillera les projets
-        const divGallery = document.querySelector(".gallery")
-       
-        // Création d’une balise dédiée à un projet
-        const projectElement = document.createElement("article")
-       
-        // Création des autres balises 
-        const imageElement = document.createElement("img")
-        imageElement.src = article.imageUrl
-        const nameElement = document.createElement("p")
-        nameElement.innerText = article.title
-       
-        // Rattachement des balises au DOM0
-        divGallery.appendChild(projectElement)
-        projectElement.appendChild(imageElement)
-        projectElement.appendChild(nameElement)
+    const article = projects[i]
+   
+    // Création d’une balise dédiée à un projet
+    const projectElement = document.createElement("article")
+   
+    // Création des autres balises 
+    const imageElement = document.createElement("img")
+    imageElement.src = article.imageUrl
+    
+    const nameElement = document.createElement("p")
+    nameElement.innerText = article.title
+   
+    // Rattachement des balises au DOM
+    projectElement.appendChild(imageElement)
+    projectElement.appendChild(nameElement)
+    divGallery.appendChild(projectElement)
     }
 }
-getProjects(projects)
+
+const projects = await fetch ('http://localhost:5678/api/works').then(projects => projects.json())
 
 //Créer le filtre Objets
 const filterObjects = document.querySelector(".objects")
@@ -33,8 +45,7 @@ filterObjects.addEventListener("click", function(){
         return project.category.name === "Objets"
     })
     document.querySelector(".gallery").innerHTML="" 
-    getProjects(filteredElement)
-    console.log(filteredElement)
+    displayProjects(filteredElement)
 })
 
 //Créer le filtre Appartements
@@ -44,8 +55,7 @@ filterFlats.addEventListener("click", function(){
         return project.category.name === "Appartements"
     })
     document.querySelector(".gallery").innerHTML=""
-    getProjects(filteredElement) 
-    console.log(filteredElement)    
+    displayProjects(filteredElement)   
 })
 
 //Créer le filtre Hôtels et restaurants
@@ -55,15 +65,14 @@ filterHotels.addEventListener("click", function(){
         return project.category.name === "Hotels & restaurants"
     })
     document.querySelector(".gallery").innerHTML=""
-    getProjects(filteredElement)  
-    console.log(filteredElement)   
+    displayProjects(filteredElement)  
 })
 
 //Créer le filtre tous
 const filterAll = document.querySelector(".all")
 filterAll.addEventListener("click", function(){
     document.querySelector(".gallery").innerHTML=""
-    getProjects(projects)    
+    displayProjects(projects)    
 })
 
 //**************************************LogedIn********************************************* */
@@ -73,20 +82,20 @@ const filterBtn = document.querySelector("div.filter")
 const headerEdit = document.querySelector(".header__edit")
 
 //Création de la fonction de connexion
-export function logedIn(){
+function logedIn(){
     const token = localStorage.getItem("token")
     const loginLink = document.querySelector(".nav__login")
     if(token !== null){
-    // Remplacement du lien Login par Loggout
+        // Remplacement du lien Login par Loggout
         loginLink.style.display = "none"
         logoutLink.style.display = "block"
     
-    // Récupération de l'élément du DOM qui accueillera la barre Edit
+        // Récupération de l'élément du DOM qui accueillera la barre Edit
         const headerEditDiv = document.createElement("div")
         headerEditDiv.setAttribute("class", "header__edit__div")
         headerEdit.appendChild(headerEditDiv)
     
-    // Création des balises dédiées à la barre Edit
+        // Création des balises dédiées à la barre Edit
         const editIcon = document.createElement("i")
         editIcon.classList = "fa-regular fa-pen-to-square"
         editIcon.setAttribute("id", "edit__icon")
@@ -96,21 +105,21 @@ export function logedIn(){
         headerEditDiv.appendChild(editIcon)
         headerEditDiv.appendChild(editText)   
     
-    // Cacher les boutons filtres    
+        // Cacher les boutons filtres    
         filterBtn.style.display = "none"
 
-   //Création du bouton modifier 
-    const editSpan = document.querySelector(".edit__span")
-    const editBtn = document.createElement("button")
-    editBtn.setAttribute("class", "edit__btn")
-    const editBtnIcon = document.createElement("i")
-    editBtnIcon.classList = "fa-regular fa-pen-to-square"
-    const editBtnText = document.createElement("p")
-    editBtnText.setAttribute("class", "edit__btn__text")
-    editBtnText.innerText = "modifier"
-    editSpan.appendChild(editBtn)
-    editBtn.appendChild(editBtnIcon)
-    editBtn.appendChild(editBtnText)   
+        //Création du bouton modifier 
+        const editSpan = document.querySelector(".edit__span")
+        const editBtn = document.createElement("button")
+        editBtn.setAttribute("class", "edit__btn")
+        const editBtnIcon = document.createElement("i")
+        editBtnIcon.classList = "fa-regular fa-pen-to-square"
+        const editBtnText = document.createElement("p")
+        editBtnText.setAttribute("class", "edit__btn__text")
+        editBtnText.innerText = "modifier"
+        editSpan.appendChild(editBtn)
+        editBtn.appendChild(editBtnIcon)
+        editBtn.appendChild(editBtnText)   
     }else{
         loginLink.style.display = "block"
         logoutLink.style.display = "none"
@@ -134,6 +143,7 @@ export function logedOut(){
     })
 }
 logedOut()
+
 //*****************************************Functions call************************************* */
 import {openModal, openUploadForm, exitOnClick} from "./modal.js"
 openModal()
